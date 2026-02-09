@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For Ayomitide ❤️</title>
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #ff6f91, #ff9671);
+      font-family: "Georgia", serif;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 45px;
+      border-radius: 25px;
+      max-width: 430px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp 2s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      color: #ff4d6d;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .question {
+      font-size: 20px;
+      margin-top: 20px;
+      color: #ff4d6d;
+      font-weight: bold;
+    }
+
+    button {
+      padding: 14px 30px;
+      font-size: 17px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 15px;
+      font-family: inherit;
+    }
+
+    .yes {
+      background-color: #ff4d6d;
+      color: white;
+      box-shadow: 0 8px 20px rgba(255,77,109,0.4);
+    }
+
+    .no {
+      background-color: #eee;
+      position: absolute;
+    }
+
+    /* STORY SCREEN */
+    .story {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #ff6f91, #ff9671);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 5;
+      color: white;
+      font-size: 34px;
+      padding: 30px;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* FLOATING HEARTS */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 26px;
+      animation: floatUp 7s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-100vh) scale(1.6); opacity: 0; }
+    }
+
+    /* CONFETTI */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -10px;
+      animation: fall 3.5s linear forwards;
+      z-index: 4;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MUSIC -->
+  <audio id="song" loop>
+    <source src="superpowers.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- FINAL STORY -->
+  <div class="story" id="story">
+    <div>
+      💖✨<br><br>
+      <strong>This is where our story begins…</strong><br><br>
+      And I hope it’s a story filled with love, laughter,<br>
+      late nights, soft moments, and forever.<br><br>
+      Ayomitide ❤️
+    </div>
+  </div>
+
+  <div class="card" id="card">
+    <h1>Ayomitide ❤️</h1>
+
+    <p>
+      I don’t know when it happened,<br>
+      but somewhere between the smiles,<br>
+      the conversations, and the little moments…
+      you became someone truly special to me.
+    </p>
+
+    <p>
+      You make my days lighter,<br>
+      my thoughts warmer,<br>
+      and my heart calmer.
+    </p>
+
+    <p class="question">
+      So here I am, honestly and wholeheartedly asking…
+      <br><br>
+      Will you be my girlfriend? 🥹💖
+    </p>
+
+    <button class="yes" onclick="sayYes()">Yes ❤️</button>
+    <button class="no" id="noBtn">No 🙈</button>
+  </div>
+
+  <script>
+    const song = document.getElementById("song");
+
+    // Start music on first interaction
+    function startMusic() {
+      song.play().catch(() => {});
+      document.removeEventListener("click", startMusic);
+      document.removeEventListener("touchstart", startMusic);
+    }
+
+    document.addEventListener("click", startMusic);
+    document.addEventListener("touchstart", startMusic);
+
+    function sayYes() {
+      song.play();
+      document.getElementById("card").style.display = "none";
+
+      // CONFETTI
+      for (let i = 0; i < 250; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.backgroundColor =
+          ["#ff4d6d", "#ffd1dc", "#fff1ac", "#ff9671"][Math.floor(Math.random() * 4)];
+        confetti.style.animationDuration = Math.random() * 2 + 2 + "s";
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 3500);
+      }
+
+      setTimeout(() => {
+        document.getElementById("story").style.display = "flex";
+      }, 1200);
+    }
+
+    // NO BUTTON RUNS
+    const noBtn = document.getElementById("noBtn");
+    noBtn.addEventListener("mouseover", () => {
+      noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
+      noBtn.style.top = Math.random() * (window.innerHeight - 120) + "px";
+    });
+
+    // FLOATING HEARTS
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = Math.random() * 3 + 5 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+
+    setInterval(createHeart, 450);
+  </script>
+
+</body>
+</html>
